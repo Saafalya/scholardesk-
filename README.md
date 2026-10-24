@@ -5,6 +5,10 @@ Merit-cum-Means Scholarship 2026-27, check each one against the scheme rules, an
 
 Saafalya Sengupta · PRN 24070126158 · AIML C1
 
+Live app: https://scholardesk-wpdp.onrender.com
+
+Report: `docs/ScholarDesk_Report.pdf` · Slides: `docs/ScholarDesk_CA3.pptx`
+
 ## What it does
 
 A college scholarship office checks every application by hand: income limit, CGPA cutoff by category,
