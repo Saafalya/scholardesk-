@@ -21,7 +21,7 @@ ollama list | findstr /i "llama3.2:3b" >nul || ollama pull llama3.2:3b
 echo.
 echo [4/4] Opening the app in your browser...
 echo   In the sidebar, press "Test the model" once so the first case is quick.
-echo   Close this window to stop the app.
+echo   The app opens at http://localhost:8510 . Close this window to stop it.
 echo.
-streamlit run app.py
+streamlit run app.py --server.port 8510
 pause
