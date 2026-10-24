@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: scholardesk
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      # Point this at a reachable Ollama server to use a real model on Render.
+      # Left at localhost, the app falls back to the built-in rule model.
+      - key: OLLAMA_HOST
+        value: http://localhost:11434
+      - key: OLLAMA_MODEL
+        value: llama3.2:3b

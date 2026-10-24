@@ -1,0 +1,74 @@
+[
+  {
+    "app_id": "MCM-2026-001",
+    "form_text": "Name: Ananya Kulkarni\nProgramme: B.Tech Computer Science, Year 3\nCategory: General\nAnnual family income: Rs 5,40,000\nPrevious year CGPA: 9.12\nAttendance last semester: 91%\nOther scholarships currently held: None\nStatement: My father runs a small hardware shop in Satara. I want to continue my studies without taking a loan.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Ananya Kulkarni\nProgramme: B.Tech CS\nSGPA Sem 3: 9.05  SGPA Sem 4: 9.19\nCumulative CGPA: 9.12\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-002",
+    "form_text": "Name: Rohan Deshmukh\nProgramme: B.Tech Mechanical, Year 2\nCategory: OBC\nAnnual family income: Rs 6,10,000\nPrevious year CGPA: 8.40\nAttendance last semester: 84%\nOther scholarships currently held: None\nStatement: First in my family to attend an engineering college.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Rohan Deshmukh\nProgramme: B.Tech Mech\nSGPA Sem 1: 7.60  SGPA Sem 2: 7.80\nCumulative CGPA: 7.70\nResult: PASS",
+    "documents": ["income_certificate", "marksheet", "category_certificate"]
+  },
+  {
+    "app_id": "MCM-2026-003",
+    "form_text": "Name: Priya Nair\nProgramme: BBA, Year 2\nCategory: General\nAnnual family income: Rs 11,80,000\nPrevious year CGPA: 9.40\nAttendance last semester: 95%\nOther scholarships currently held: None\nStatement: I am applying to reduce the burden on my parents.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Priya Nair\nProgramme: BBA\nSGPA Sem 1: 9.35  SGPA Sem 2: 9.45\nCumulative CGPA: 9.40\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-004",
+    "form_text": "Name: Imran Shaikh\nProgramme: B.Tech AIML, Year 3\nCategory: SC\nAnnual family income: Rs 2,90,000\nPrevious year CGPA: 7.35\nAttendance last semester: 88%\nOther scholarships currently held: None\nStatement: My mother is a tailor and the only earning member at home.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Imran Shaikh\nProgramme: B.Tech AIML\nSGPA Sem 3: 7.20  SGPA Sem 4: 7.50\nCumulative CGPA: 7.35\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-005",
+    "form_text": "Name: Sneha Patil\nProgramme: B.Sc Data Science, Year 2\nCategory: EWS\nAnnual family income: Rs 4,20,000\nPrevious year CGPA: 8.05\nAttendance last semester: 69%\nOther scholarships currently held: None\nStatement: I missed classes for two months while caring for my grandmother.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Sneha Patil\nProgramme: B.Sc DS\nSGPA Sem 1: 8.00  SGPA Sem 2: 8.10\nCumulative CGPA: 8.05\nResult: PASS",
+    "documents": ["income_certificate", "marksheet", "category_certificate"]
+  },
+  {
+    "app_id": "MCM-2026-006",
+    "form_text": "Name: Aditya Joshi\nProgramme: B.Tech E&TC, Year 4\nCategory: General\nAnnual family income: Rs 7,20,000\nPrevious year CGPA: 8.65\nAttendance last semester: 82%\nOther scholarships currently held: None\nStatement: Final year student, hoping to finish without an education loan.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Aditya Joshi\nProgramme: B.Tech E&TC\nSGPA Sem 5: 8.60  SGPA Sem 6: 8.70\nCumulative CGPA: 8.65\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-007",
+    "form_text": "Name: Kavya Iyer\nProgramme: B.Tech Civil, Year 3\nCategory: ST\nAnnual family income: Rs 3,60,000\nPrevious year CGPA: 7.80\nAttendance last semester: 90%\nOther scholarships currently held: None\nStatement: My family farms in Nandurbar district.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Kavya Iyer\nProgramme: B.Tech Civil\nSGPA Sem 3: 7.70  SGPA Sem 4: 7.90\nCumulative CGPA: 7.80\nResult: PASS",
+    "documents": ["income_certificate", "marksheet", "category_certificate"]
+  },
+  {
+    "app_id": "MCM-2026-008",
+    "form_text": "Name: Neha Gupta\nProgramme: B.Tech CS, Year 2\nCategory: General\nAnnual family income: Rs 6,80,000\nPrevious year CGPA: 8.90\nAttendance last semester: 87%\nOther scholarships currently held: State Merit Scholarship (full tuition)\nStatement: I would like additional support for hostel fees.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Neha Gupta\nProgramme: B.Tech CS\nSGPA Sem 1: 8.85  SGPA Sem 2: 8.95\nCumulative CGPA: 8.90\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-009",
+    "form_text": "Name: Siddharth Rao\nProgramme: BCA, Year 3\nCategory: OBC\nAnnual family income: Rs 7,95,000\nPrevious year CGPA: 7.55\nAttendance last semester: 76%\nOther scholarships currently held: None\nStatement: My father recently changed jobs and our income dropped.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Siddharth Rao\nProgramme: BCA\nSGPA Sem 3: 7.50  SGPA Sem 4: 7.60\nCumulative CGPA: 7.55\nResult: PASS",
+    "documents": ["income_certificate", "marksheet", "category_certificate"]
+  },
+  {
+    "app_id": "MCM-2026-010",
+    "form_text": "Name: Meera Bhosale\nProgramme: B.Tech AIML, Year 2\nCategory: General\nAnnual family income: Rs 3,10,000\nPrevious year CGPA: 9.30\nAttendance last semester: 93%\nOther scholarships currently held: None\nStatement: I lost my father last year and my mother works as a nurse.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Meera Bhosale\nProgramme: B.Tech AIML\nSGPA Sem 1: 9.25  SGPA Sem 2: 9.35\nCumulative CGPA: 9.30\nResult: PASS",
+    "documents": ["marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-011",
+    "form_text": "Name: Arjun Mehta\nProgramme: B.Tech CS, Year 3\nCategory: General\nAnnual family income: Rs 4,80,000\nPrevious year CGPA: 8.20\nAttendance last semester: 80%\nOther scholarships currently held: None\nStatement: Applying for the merit-cum-means award.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Arjun Mehta\nProgramme: B.Tech CS\nSGPA Sem 3: 7.90  SGPA Sem 4: 7.70\nCumulative CGPA: 7.80\nResult: PASS",
+    "documents": ["income_certificate", "marksheet"]
+  },
+  {
+    "app_id": "MCM-2026-012",
+    "form_text": "Name: Tanvi Chavan\nProgramme: B.Des, Year 2\nCategory: EWS\nAnnual family income: Rs 5,90,000\nPrevious year CGPA: 7.90\nAttendance last semester: 86%\nOther scholarships currently held: None\nStatement: Design materials are expensive and this would help me keep up.",
+    "marksheet_text": "STATEMENT OF GRADES 2025-26\nStudent: Tanvi Chavan\nProgramme: B.Des\nSGPA Sem 1: 7.85  SGPA Sem 2: 7.95\nCumulative CGPA: 7.90\nResult: PASS",
+    "documents": ["income_certificate", "marksheet", "category_certificate"]
+  }
+]
