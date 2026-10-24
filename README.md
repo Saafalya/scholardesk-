@@ -3,7 +3,7 @@
 An agentic AI proof of concept for CA-3. Six agents screen scholarship applications for a synthetic
 Merit-cum-Means Scholarship 2026-27, check each one against the scheme rules, and explain every decision.
 
-Saafalya Sengupta · PRN 24070126158 · AIML C1
+Saafalya Sengupta (PRN 24070126158) and Swastik Gavhane (PRN 24070126224) · AIML C1
 
 Live app: https://scholardesk-wpdp.onrender.com
 

@@ -94,7 +94,7 @@ def on_page(c, doc):
     c.saveState()
     c.setFont("Body", 8)
     c.setFillColor(SOFT)
-    c.drawString(20 * mm, 12 * mm, "Scholarship Screening Desk · CA-3 Agentic AI PoC · Saafalya Sengupta")
+    c.drawString(20 * mm, 12 * mm, "Scholarship Screening Desk · CA-3 Agentic AI PoC · Saafalya Sengupta & Swastik Gavhane")
     c.drawRightString(190 * mm, 12 * mm, str(doc.page))
     c.setStrokeColor(RULE)
     c.line(20 * mm, 16 * mm, 190 * mm, 16 * mm)
@@ -130,7 +130,8 @@ def cover(c, doc):
     c.saveState()
     c.setFillColor(INK)
     y = H - 140 * mm
-    for k, v in [("Student", "Saafalya Sengupta"), ("PRN", "24070126158"), ("Class / Division", "AIML C1"),
+    for k, v in [("Student 1", "Saafalya Sengupta · PRN 24070126158"), ("Student 2", "Swastik Gavhane · PRN 24070126224"),
+                 ("Class / Division", "AIML C1"),
                  ("Domain", "Education: scholarship administration"),
                  ("Faculty", "Harshal Raut"), ("Date", "24 October 2026")]:
         c.setFont("Body", 9)
@@ -356,6 +357,6 @@ S.append(P(f"Code: {REPO_URL}<br/>Live app: {LIVE_URL}", small))
 out = ROOT / "docs/ScholarDesk_Report.pdf"
 doc = SimpleDocTemplate(str(out), pagesize=A4, leftMargin=20 * mm, rightMargin=20 * mm,
                         topMargin=20 * mm, bottomMargin=22 * mm, title="Scholarship Screening Desk — CA-3 Report",
-                        author="Saafalya Sengupta")
+                        author="Saafalya Sengupta, Swastik Gavhane")
 doc.build(S, onFirstPage=cover, onLaterPages=on_page)
 print("wrote", out, "| matches", matches, "caught", caught, "agree", agree, "forced_ok", forced_ok)

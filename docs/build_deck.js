@@ -31,7 +31,7 @@ async function icon(Comp, color, size = 256) {
 (async () => {
   const pres = new pptxgen();
   pres.layout = "LAYOUT_16x9"; // 10 x 5.625
-  pres.author = "Saafalya Sengupta";
+  pres.author = "Saafalya Sengupta, Swastik Gavhane";
   pres.title = "Scholarship Screening Desk — CA-3 Agentic AI PoC";
   pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
   const C = pres.SchemeColor;
@@ -53,7 +53,7 @@ async function icon(Comp, color, size = 256) {
     objects: [
       { placeholder: { options: { name: "title", type: "title", x: 0.5, y: 0.32, w: 9.0, h: 0.7, fontSize: 26, bold: true,
           color: C.text1, valign: "middle", align: "left", margin: 0 }, text: "" } },
-      { text: { text: "Scholarship Screening Desk · Saafalya Sengupta · AIML C1",
+      { text: { text: "Scholarship Screening Desk · Saafalya Sengupta & Swastik Gavhane · AIML C1",
           options: { x: 0.5, y: 5.22, w: 6, h: 0.25, fontSize: 9, color: C.text2, margin: 0 } } },
     ],
     slideNumber: { x: 9.1, y: 5.22, w: 0.4, h: 0.25, fontSize: 9, color: C.text2, align: "right" },
@@ -78,12 +78,13 @@ async function icon(Comp, color, size = 256) {
     { placeholder: "body" });
   stamp(s, "ELIGIBLE", 7.25, 1.55, 2.1, "7FC79A", -7, 22);
   s.addText([
-    { text: "Saafalya Sengupta", options: { bold: true, color: HEX.lt1, breakLine: true } },
-    { text: "PRN 24070126158 · AIML C1 · CA-3 Agentic AI PoC", options: { color: "C9D2DE" } },
-  ], { x: 0.6, y: 4.45, w: 6.5, h: 0.6, fontSize: 13, margin: 0, isTextBox: true, objectName: "byline" });
-  s.addText("Domain: Education", { x: 7.25, y: 4.6, w: 2.2, h: 0.3, fontSize: 12, color: "C9D2DE", align: "right",
+    { text: "Saafalya Sengupta · PRN 24070126158", options: { bold: true, color: HEX.lt1, breakLine: true } },
+    { text: "Swastik Gavhane · PRN 24070126224", options: { bold: true, color: HEX.lt1, breakLine: true } },
+    { text: "AIML C1 · CA-3 Agentic AI PoC", options: { color: "C9D2DE" } },
+  ], { x: 0.6, y: 4.1, w: 6.5, h: 0.95, fontSize: 13, margin: 0, isTextBox: true, objectName: "byline" });
+  s.addText("Domain: Education", { x: 7.25, y: 4.75, w: 2.2, h: 0.3, fontSize: 12, color: "C9D2DE", align: "right",
     margin: 0, isTextBox: true, objectName: "domain" });
-  s.addNotes("Hi, I'm Saafalya. My project is the Scholarship Screening Desk, an agentic AI proof of concept in the education domain. It uses six agents to screen scholarship applications the way a college office does, but with every rule checked and every decision explained.");
+  s.addNotes("Hi, we're Saafalya and Swastik. Our project is the Scholarship Screening Desk, an agentic AI proof of concept in the education domain. It uses six agents to screen scholarship applications the way a college office does, but with every rule checked and every decision explained.");
 
   // ================================================================ 2. problem
   pres.addSection({ title: "Problem" });
