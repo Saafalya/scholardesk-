@@ -86,6 +86,46 @@ def test_ollama_path_with_a_wrong_model_answer():
     assert llm.calls == 4
 
 
+FREEFORM = json.loads((ROOT / "data/sample_freeform.json").read_text())
+
+
+def _fake_ollama(replies):
+    it = iter(replies)
+
+    def fake_post(url, json=None, timeout=None):
+        r = next(it)
+        body = {"message": {"content": r if isinstance(r, str) else __import__("json").dumps(r)}}
+        return mock.Mock(status_code=200, json=lambda: body, raise_for_status=lambda: None)
+    return fake_post
+
+
+def test_freeform_needs_ollama_for_lakh_income():
+    """The rule model can't read 'earns about 3.2 lakh a year'; Ollama can, and the Critic accepts it."""
+    rules_only = Orchestrator(LLM("mock"), REG).screen(FREEFORM)
+    assert rules_only.decision["verdict"] == "needs_documents"
+
+    good = {"name": "Riya Pawar", "programme": "B.Tech IT", "category": "OBC", "income": 320000,
+            "form_cgpa": 8.1, "attendance": 88, "other_award": None, "sheet_cgpa": 8.1}
+    plan = {"category": "OBC", "steps": ["check_income"], "notes": ["Reserved category"]}
+    with mock.patch("agents.llm.requests.post", side_effect=_fake_ollama([plan, good, "Eligible."])):
+        c = Orchestrator(LLM("ollama"), REG).screen(FREEFORM)
+    assert c.decision["verdict"] == "eligible", c.checks
+    assert not any(e.agent == "Orchestrator" for e in c.trace)
+
+
+def test_grounding_catches_invented_number():
+    """A number that appears nowhere in the text is sent back, even when patterns can't read the field."""
+    good = {"name": "Riya Pawar", "programme": "B.Tech IT", "category": "OBC", "income": 320000,
+            "form_cgpa": 8.1, "attendance": 88, "other_award": None, "sheet_cgpa": 8.1}
+    invented = dict(good, income=250000)
+    plan = {"category": "OBC", "steps": [], "notes": []}
+    with mock.patch("agents.llm.requests.post", side_effect=_fake_ollama([plan, invented, good, "ok"])):
+        c = Orchestrator(LLM("ollama"), REG).screen(FREEFORM)
+    critic = [e for e in c.trace if e.agent == "Critic"][0]
+    assert "250000" in critic.detail
+    assert c.decision["verdict"] == "eligible"
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

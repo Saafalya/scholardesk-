@@ -5,7 +5,7 @@ Merit-cum-Means Scholarship 2026-27, check each one against the scheme rules, an
 
 Saafalya Sengupta (PRN 24070126158) and Swastik Gavhane (PRN 24070126224) · AIML C1
 
-Live app: https://scholardesk-wpdp.onrender.com
+Backup link (rule model only): https://scholardesk-wpdp.onrender.com
 
 Report: `docs/ScholarDesk_Report.pdf` · Slides: `docs/ScholarDesk_CA3.pptx`
 
@@ -30,14 +30,27 @@ number of awards available.
 
 ## Run it on your laptop with Ollama
 
+On Windows, double-click `run_windows.bat`. It sets up Python packages, starts Ollama, pulls
+`llama3.2:3b` if it isn't installed, and opens the app in your browser.
+
+By hand, on any system:
+
 ```bash
 pip install -r requirements.txt
 ollama pull llama3.2:3b      # any chat model works; pick it in the sidebar
-ollama serve                 # if it isn't already running
 streamlit run app.py
 ```
 
-If Ollama isn't running, the app uses a built-in rule model so the full agent pipeline still works.
+The sidebar shows whether Ollama is running, which models are installed, and has a "Test the model"
+button that loads the model so the first case is quick. Each step in the agent trace is labelled with
+who did the work (Ollama, the rule model, or plain Python) and how long it took, and you can open the
+exact prompt and reply for every model call.
+
+The "Paste a new application" tab is where Ollama matters most: the built-in rule model can't read
+plain-language text like "our family earns about 3.2 lakh a year", but a local model can, and the
+Critic still checks every number it returns against the source text.
+
+If Ollama isn't running, the app falls back to the built-in rule model so the pipeline still works.
 
 ## Tests
 
@@ -48,11 +61,10 @@ python tests/test_pipeline.py
 The tests check all 12 synthetic cases against hand-labelled verdicts, confirm the Critic catches injected
 extraction mistakes, and simulate a wrong Ollama answer to confirm the send-back loop works.
 
-## Deploy on Render
+## Optional: Render
 
-`render.yaml` sets up a free Python web service. Render's free tier has 512 MB of RAM, which is not enough
-to run an Ollama model, so the hosted app uses the built-in rule model unless `OLLAMA_HOST` points to a
-reachable Ollama server.
+The app runs locally with Ollama. `render.yaml` also sets up a free Render web service as a backup link,
+but Render's free tier can't run Ollama, so that copy uses the built-in rule model.
 
 ## Files
 
