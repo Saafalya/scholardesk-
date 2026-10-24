@@ -493,7 +493,7 @@ with tab3:
           <div><b>{counts.get('Not eligible', 0)}</b>Not eligible</div>
           <div><b>{b['retries']}</b>Sent back by the Critic</div>
           <div><b>{b['calls']}</b>Ollama calls</div>
-          <div><b>{b['secs']:.0f} s</b>{esc(b['label'])}</div>
+          <div><b>{secs(int(b['secs'] * 1000))}</b>{esc(b['label'])}</div>
         </div>""")
         view = df.copy()
         view["Rank"] = view["Rank"].map(lambda r: "—" if pd.isna(r) else str(int(r)))

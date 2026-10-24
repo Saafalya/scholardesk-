@@ -128,7 +128,7 @@ async function icon(Comp, color, size = 256) {
   const agents = [
     [fa.FaRoute, "Planner", "Decides which checks apply, such as relaxed cutoffs for reserved categories", "Ollama", false],
     [fa.FaFileAlt, "Extractor", "Pulls income, CGPA, attendance and other fields from free text", "Ollama", false],
-    [fa.FaUserCheck, "Critic", "Re-reads the source, sends wrong extractions back, checks the final verdict", "Python", true],
+    [fa.FaUserCheck, "Critic", "Checks every number against the source, sends wrong fields back, checks the verdict", "Python", true],
     [fa.FaTools, "Validator", "Executor: runs six rule checks as Python tool calls", "Python", false],
     [fa.FaGavel, "Decision", "Eligible, not eligible or needs documents, plus a merit-cum-means score", "Python", false],
     [fa.FaPenFancy, "Reporter", "Writes a plain-English reason for the reviewer", "Ollama", false],
@@ -196,16 +196,16 @@ async function icon(Comp, color, size = 256) {
   // ================================================================ 6. demo
   pres.addSection({ title: "Demo" });
   s = pres.addSlide({ masterName: "Title only", sectionTitle: "Demo" });
-  s.addText("Demo: the Critic catches a slip", { placeholder: "title" });
-  s.addImage({ path: path.join(__dirname, "shots/02_case_verdict.png"), x: 0.5, y: 1.15, w: 3.6, h: 3.86,
-    altText: "Screenshot of the app screening application MCM-2026-002 with a NOT ELIGIBLE stamp, rule checks and the agent trace",
+  s.addText("Demo: live agents on a local model", { placeholder: "title" });
+  s.addImage({ path: path.join(__dirname, "shots/v2_case_deck.png"), x: 0.5, y: 1.12, w: 2.4, h: 3.94,
+    altText: "Screenshot of the app: NOT ELIGIBLE stamp, rule checks, and six agent tiles with the Critic tile in amber after a send-back",
     objectName: "demo-shot" });
-  const demoX = 4.4;
+  const demoX = 3.25;
   const steps = [
-    ["Pick an application", "MCM-2026-002, Rohan Deshmukh, OBC. The demo switch makes the Extractor slip once."],
-    ["Critic sends it back", "Trace steps 3–6: the Critic spots a wrong field, the Extractor re-reads, the Critic accepts."],
-    ["Validator runs six tools", "Five pass. check_consistency fails: form says 8.40, marksheet says 7.70."],
-    ["Stamp and reason", "Not eligible, with the exact rule named for the reviewer."],
+    ["Check the model", "The sidebar shows Ollama running with llama3.2:3b. Test the model loads it before the first case."],
+    ["Watch the agents work", "Six tiles light up as each agent runs. Every trace step shows Ollama, rule model or Python, and its time."],
+    ["Critic catches a slip", "MCM-2026-002 with the demo switch: the Critic sends it back, then the CGPA mismatch fails."],
+    ["Paste plain language", "“Earns about 3.2 lakh a year”: the rule model can't read it, Ollama can, the Critic checks it."],
   ];
   for (let i = 0; i < steps.length; i++) {
     const y = 1.15 + i * 0.98;
@@ -214,11 +214,10 @@ async function icon(Comp, color, size = 256) {
     s.addText([
       { text: steps[i][0], options: { bold: true, fontSize: 15, breakLine: true } },
       { text: steps[i][1], options: { fontSize: 13, color: C.text2 } },
-    ], { x: demoX + 0.6, y: y - 0.06, w: 4.5, h: 0.9, valign: "top", margin: 0, isTextBox: true, objectName: `demo-t-${i}` });
+    ], { x: demoX + 0.6, y: y - 0.06, w: 5.6, h: 0.9, valign: "top", margin: 0, isTextBox: true, objectName: `demo-t-${i}` });
   }
-  s.addText(`Live: ${LIVE}`, { x: demoX + 0.6, y: 4.95, w: 4.5, h: 0.25, fontSize: 11, color: C.accent2, bold: true, margin: 0, isTextBox: true, objectName: "demo-link",
-    hyperlink: { url: "https://" + LIVE } });
-  s.addNotes("Switch to the app now. Pick MCM-2026-002, turn on 'Make the Extractor slip once', and press Screen. Point at the trace: the Critic finds a mismatch, the orchestrator sends it back, the Extractor re-reads and the Critic accepts. Then the Validator runs six tools. Five pass, but the form says CGPA 8.40 while the marksheet says 7.70, so it's not eligible. Then switch to the batch tab, set four awards, and screen all twelve.");
+  s.addText("Runs locally: double-click run_windows.bat", { x: demoX + 0.6, y: 4.95, w: 5.6, h: 0.25, fontSize: 11, color: C.accent2, bold: true, margin: 0, isTextBox: true, objectName: "demo-link" });
+  s.addNotes("Switch to the app. First point at the sidebar: Ollama is running with llama3.2:3b, and Test the model loads it. Screen any application and watch the six tiles light up; each trace step has a badge saying whether Ollama, the rule model or plain Python did it, with the time. Then pick MCM-2026-002 with 'Make the Extractor slip once' on, using the rule model, to show the Critic sending the case back. Finally open the Paste tab: the plain-language application says income is about 3.2 lakh a year. The rule model can't read it, Ollama can, and the Critic confirms 3.2 lakh is in the text.");
 
   // ================================================================ 7. results
   pres.addSection({ title: "Results" });
@@ -281,12 +280,12 @@ async function icon(Comp, color, size = 256) {
   s.addText("Questions welcome", { placeholder: "body" });
   stamp(s, "REVIEWED", 7.15, 1.55, 2.2, "7FA3D6", -6, 20);
   s.addText([
-    { text: "Live app  ", options: { color: "C9D2DE" } },
-    { text: LIVE, options: { color: HEX.lt1, bold: true, hyperlink: { url: "https://" + LIVE }, breakLine: true } },
+    { text: "Run it  ", options: { color: "C9D2DE" } },
+    { text: "run_windows.bat · Streamlit + Ollama on the laptop", options: { color: HEX.lt1, bold: true, breakLine: true } },
     { text: "Code  ", options: { color: "C9D2DE" } },
     { text: REPO, options: { color: HEX.lt1, bold: true, hyperlink: { url: "https://" + REPO } } },
   ], { x: 0.6, y: 4.2, w: 8.5, h: 0.75, fontSize: 14, margin: 0, isTextBox: true, objectName: "links" });
-  s.addNotes("Thank you. The app is live on Render and the code is on GitHub. Happy to take questions.");
+  s.addNotes("Thank you. The app runs locally with Ollama from one launcher, and the code is on GitHub. Happy to take questions.");
 
   const out = path.join(__dirname, "ScholarDesk_CA3.pptx");
   await pres.writeFile({ fileName: out });

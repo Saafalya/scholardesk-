@@ -145,7 +145,7 @@ def cover(c, doc):
         y -= 12 * mm
     c.setFont("Body", 9)
     c.setFillColor(SOFT)
-    c.drawString(22 * mm, 30 * mm, f"Live app: {LIVE_URL}")
+    c.drawString(22 * mm, 30 * mm, "Run locally: double-click run_windows.bat (Ollama + Streamlit)")
     c.drawString(22 * mm, 24 * mm, f"Code: {REPO_URL}")
     c.restoreState()
 
@@ -188,13 +188,13 @@ S.append(P("Proposed solution", h2))
 S.append(P(
     "Scholarship Screening Desk hands this routine work to six cooperating agents. A Planner decides which "
     "checks apply. An Extractor uses a local language model (Ollama) to pull fields out of the free-text form "
-    "and marksheet. A Critic independently re-reads the source text and sends the case back when a field is "
-    "wrong. A Validator runs every scheme rule as a Python tool. A Decision agent turns the rule results into "
+    "and marksheet. A Critic independently re-reads the source text, checks that every number the model "
+    "returned actually appears in it, and sends the case back when a field is wrong. A Validator runs every scheme rule as a Python tool. A Decision agent turns the rule results into "
     "one of three verdicts and scores eligible students. A Reporter writes a plain-English note for the "
     "reviewer. In batch mode the system ranks eligible students and fills the number of awards available."))
 S.append(P(
-    "The human reviewer stays in charge. The system recommends and explains; it does not disburse money. Every "
-    "step is shown in an agent trace, so a reviewer can see exactly why a case landed where it did."))
+    "The human reviewer stays in charge: the system recommends and explains, and every step is shown in an "
+    "agent trace."))
 
 S.append(PageBreak())
 S.append(P("3. Agent roles, responsibilities and orchestration", h1))
@@ -204,8 +204,9 @@ S.append(table([
      "reserved categories. A guardrail adds back any mandatory check the model leaves out.", "Yes"],
     ["Extractor", "Research", "Turns the free-text form and marksheet into structured fields: name, category, "
      "income, form CGPA, marksheet CGPA, attendance and other awards.", "Yes"],
-    ["Critic", "Critic", "Re-reads the source text with a separate parser and compares field by field. On a "
-     "mismatch it sends the case back with its notes. If retries run out, it overrides the wrong fields. After "
+    ["Critic", "Critic", "Runs two checks on the extraction: a separate pattern reader compares field by field, "
+     "and a grounding check confirms every number appears in the source text (5.4 lakh counts as 540000). On a "
+     "mismatch it sends the case back with its notes; if retries run out, it replaces or clears the field. After "
      "the verdict it checks the verdict agrees with every rule result.", "No"],
     ["Validator", "Executor", "Calls six Python tools: check_income, check_cgpa, check_attendance, "
      "check_documents, check_consistency and check_registry. Each returns pass, fail, missing or unclear with "
@@ -245,25 +246,32 @@ S.append(table([
     ["Layer", "What it is", "Technology"],
     ["Interface", "Single-case screening, batch shortlist, rules and design tabs", "Streamlit"],
     ["Orchestration", "Runs agents in order, holds shared case state, controls retries", "Plain Python classes"],
-    ["Model", "Planner, Extractor and Reporter prompts, JSON output mode", "Ollama, llama3.2:3b (local, free)"],
+    ["Model", "Planner, Extractor and Reporter prompts; JSON-schema structured output", "Ollama, llama3.2:3b (local, free)"],
     ["Fallback model", "Rule-based model with the same interface when Ollama is not reachable", "Python regex"],
     ["Tools", "Six rule functions the Validator calls", "Python"],
     ["Data", "12 synthetic applications and a synthetic awards registry", "JSON files"],
-    ["Hosting", "Public demo link", "Render free web service"],
+    ["Running it", "One-click Windows launcher on the laptop; optional backup link", "run_windows.bat; Render (rule model)"],
 ], [28 * mm, 92 * mm, 50 * mm]))
 
 S.append(PageBreak())
 S.append(P("5. Working Streamlit PoC", h1))
 S.append(P(
-    f"The app runs locally with Ollama and is also deployed at <b>{LIVE_URL}</b>. The sidebar shows which model "
-    "is answering, lets the reviewer pick an Ollama model, and has a demo switch that makes the Extractor slip "
-    "once so the Critic's send-back can be seen live."))
-S.append(KeepTogether([image(ROOT / "docs/shots/02_case_top.png", 150 * mm), P("Figure 2. Screening one application. The form and marksheet sit on the left. The verdict stamp, "
-           "reviewer note, rule checks and the numbered agent trace sit on the right. Here the Critic caught an "
-           "extraction mistake (steps 3–6) and the case was rejected for an inflated CGPA.", cap)]))
+    "The app runs on the laptop with Ollama. Double-clicking run_windows.bat sets up Python packages, starts "
+    "Ollama, pulls llama3.2:3b if it is missing and opens the app. The sidebar shows whether Ollama is running, "
+    "which models are installed, and a Test the model button that loads the model before the demo. While a case "
+    "runs, a strip of six agent tiles lights up as each agent works. Every step in the trace is labelled with who "
+    "did the work (Ollama, the rule model or plain Python) and how long it took, and the exact prompt and reply "
+    "for each model call can be opened."))
+S.append(KeepTogether([image(ROOT / "docs/shots/v2_case_report.png", 128 * mm), P("Figure 2. Screening one application. The verdict card shows the stamp, the reviewer note, time "
+           "taken, model calls and send-backs. Here the demo switch made the Extractor slip, the Critic sent the "
+           "case back (amber tile), and the case was rejected for an inflated CGPA.", cap)]))
+S.append(KeepTogether([image(ROOT / "docs/shots/v2_paste_rules.png", 118 * mm), P("Figure 3. The Paste a new application tab, run here with the built-in rule model. It cannot read "
+           "“earns about 3.2 lakh a year”, so income is marked unclear and the case needs details. With Ollama, the "
+           "Extractor reads it as ₹3,20,000 and the Critic's grounding check accepts it because 3.2 lakh appears in "
+           "the text; the automated tests confirm this path with simulated Ollama replies.", cap)]))
 S.append(PageBreak())
-S.append(image(ROOT / "docs/shots/03_batch.png", 170 * mm))
-S.append(P("Figure 3. Batch screening of all 12 applications with four awards available.", cap))
+S.append(image(ROOT / "docs/shots/v2_batch.png", 150 * mm))
+S.append(P("Figure 4. Batch screening of all 12 applications with four awards available.", cap))
 S.append(P("Synthetic data", h2))
 S.append(P(
     "The 12 applications are invented but realistic, and each one is built to test a specific rule: a clean "
@@ -299,6 +307,8 @@ S.append(table([
     ["Critic override with no retries", "Mistakes injected and retries set to zero", f"{forced_ok} of 12 verdicts unchanged"],
     ["Planner guardrail", "Simulated Ollama plan that lists only one check", "All six checks restored"],
     ["Real model path", "Simulated Ollama reply with a wrong income, then a correct one", "Caught; correct verdict"],
+    ["Plain-language input", "Free-text application with income written as 3.2 lakh", "Rule model: needs details; Ollama: eligible"],
+    ["Invented number", "Simulated Ollama reply with an income that is not in the text", "Grounding check sends it back"],
     ["Decision consistency", "Critic compares each verdict with the rule results", "0 contradictions"],
 ], [44 * mm, 86 * mm, 40 * mm]))
 S.append(Spacer(1, 6))
@@ -316,13 +326,13 @@ S.append(P("7. Limitations", h1))
 for t_ in [
     "<b>Synthetic data only.</b> The forms are clean text. Real applications arrive as scanned PDFs and photos, "
     "which would need OCR before the Extractor.",
-    "<b>Critic uses the same patterns as the fallback model.</b> When Ollama is not running, the Critic and "
-    "the fallback Extractor read the text the same way, so they agree unless the demo switch injects a mistake. "
-    "The Critic is most useful when a real model does the extraction.",
+    "<b>Pattern check shares code with the fallback model.</b> In rule-model mode the Critic's pattern check "
+    "reads the text the same way as the fallback Extractor, so only the grounding check is independent. The "
+    "Critic is most useful when Ollama does the extraction.",
     "<b>Small local model.</b> llama3.2:3b can misread numbers or return broken JSON. The Critic and the "
     "fallback catch this, but extraction is slower than a larger hosted model.",
-    "<b>Hosted demo has no model.</b> Render's free tier has 512 MB of RAM, too little for Ollama, so the "
-    "public link runs the built-in rule model.",
+    "<b>Runs on one laptop.</b> The full Ollama version needs the laptop running it. The optional Render "
+    "link has too little memory for Ollama, so it uses the built-in rule model.",
     "<b>Rules are fixed in code.</b> A new scheme needs a developer to change rules.py.",
     "<b>No document authenticity check.</b> The system checks that documents are attached, not that they are genuine.",
 ]:
@@ -348,11 +358,12 @@ S.append(table([["Category", "Minimum CGPA", "Documents required"]] +
                [[k, f"{v:.1f}", ", ".join(d.replace("_", " ") for d in rules.required_documents(k))]
                 for k, v in rules.CGPA_CUTOFF.items()], [30 * mm, 30 * mm, 110 * mm]))
 S.append(P("Appendix B. How to run", h1))
+S.append(P("On Windows, double-click run_windows.bat. By hand on any system:"))
 for line in ["pip install -r requirements.txt", "ollama pull llama3.2:3b", "streamlit run app.py",
              "python tests/test_pipeline.py"]:
     S.append(P(line, ParagraphStyle("code", parent=body, fontName="Mono", fontSize=9, backColor=PAPER,
                                     borderPadding=5, spaceAfter=9)))
-S.append(P(f"Code: {REPO_URL}<br/>Live app: {LIVE_URL}", small))
+S.append(P(f"Code: {REPO_URL}<br/>Backup link (rule model only): {LIVE_URL}", small))
 
 out = ROOT / "docs/ScholarDesk_Report.pdf"
 doc = SimpleDocTemplate(str(out), pagesize=A4, leftMargin=20 * mm, rightMargin=20 * mm,
