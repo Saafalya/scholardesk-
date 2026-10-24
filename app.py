@@ -47,16 +47,19 @@ st.html("""
   --head:'Bricolage Grotesque','Public Sans',system-ui,sans-serif; --body:'Public Sans',system-ui,sans-serif;
 }
 html, body, .stMarkdown, p, li, label, input, textarea, button, [data-testid="stWidgetLabel"] {font-family:var(--body);}
-.block-container{padding-top:1.8rem; max-width:1280px;}
+/* leave room for Streamlit's fixed top bar so the title is never hidden under it */
+.block-container{padding-top:4.5rem; max-width:1280px;}
+header[data-testid="stHeader"]{background:var(--paper);}
 h1,h2,h3,h4{font-family:var(--head); color:var(--ink); letter-spacing:-.01em;}
 .block-container h4{font-size:1.08rem; margin:1.2rem 0 .5rem;}
 
 /* masthead */
 .mast{display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; flex-wrap:wrap;
   border-bottom:2px solid var(--ink); padding-bottom:.9rem; margin-bottom:1.1rem;}
-.mast h1{font-size:2.3rem; line-height:1.05; margin:0; font-weight:700;}
+.mast h1{font-size:2.3rem; line-height:1.15; margin:0; padding:0; font-weight:700;}
+.mast > div{min-width:0; flex:1 1 28rem;}
 .mast p{margin:.4rem 0 0; color:var(--ink-soft); font-size:.98rem; max-width:62ch;}
-.pill{display:inline-flex; align-items:center; gap:.45rem; font-size:.84rem; padding:.38rem .75rem;
+.pill{max-width:100%; flex:none; display:inline-flex; align-items:center; gap:.45rem; font-size:.84rem; padding:.38rem .75rem;
   border-radius:999px; background:var(--sheet); border:1px solid var(--rule); color:var(--ink-soft); white-space:nowrap;}
 .pill b{color:var(--ink); font-weight:600;}
 .pill i{width:.55rem; height:.55rem; border-radius:50%; display:inline-block;}
@@ -64,10 +67,11 @@ h1,h2,h3,h4{font-family:var(--head); color:var(--ink); letter-spacing:-.01em;}
 /* application sheet */
 .sheet{background:var(--sheet); border:1px solid var(--rule); border-radius:6px; padding:1.05rem 1.2rem;}
 .sheet h4{margin:0 0 .55rem; font-size:1rem;}
-.formrow{display:grid; grid-template-columns:11rem 1fr; gap:.75rem; padding:.42rem 0;
+.formrow{display:flex; flex-wrap:wrap; column-gap:.75rem; row-gap:.1rem; overflow-wrap:break-word; padding:.42rem 0;
   border-bottom:1px dashed var(--rule); font-size:.92rem;}
 .formrow:last-of-type{border-bottom:none;}
-.formrow span:first-child{color:var(--ink-soft);} .formrow span:last-child{color:var(--ink); font-weight:500;}
+.formrow span:first-child{color:var(--ink-soft); flex:0 0 10.5rem;}
+.formrow span:last-child{color:var(--ink); font-weight:500; flex:1 1 9rem; min-width:0;}
 .marks{font-variant-numeric:tabular-nums; white-space:pre-wrap; font-size:.86rem; color:var(--ink);
   background:#F6F8FB; border-left:3px solid var(--ink); padding:.7rem .9rem; border-radius:0 4px 4px 0;}
 .clips{display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.75rem;}
@@ -75,7 +79,7 @@ h1,h2,h3,h4{font-family:var(--head); color:var(--ink); letter-spacing:-.01em;}
 .clip.absent{border-style:dashed; color:var(--fail); border-color:#E3B3AF;}
 
 /* live agent pipeline */
-.pipe{display:grid; grid-template-columns:repeat(auto-fit,minmax(6.6rem,1fr)); gap:.4rem; margin:.2rem 0 .5rem;}
+.pipe{display:grid; grid-template-columns:repeat(auto-fit,minmax(5.6rem,1fr)); gap:.4rem; margin:.2rem 0 .5rem;}
 .node{border:1.5px solid var(--rule); border-radius:8px; padding:.5rem .55rem; background:var(--sheet); min-height:3.4rem;}
 .node b{display:block; font-family:var(--head); font-size:.92rem; color:var(--ink-soft);}
 .node small{display:block; font-size:.74rem; color:var(--ink-soft); margin-top:.15rem; line-height:1.25;}
@@ -146,7 +150,6 @@ h1,h2,h3,h4{font-family:var(--head); color:var(--ink); letter-spacing:-.01em;}
 .stButton>button:focus-visible, .stDownloadButton>button:focus-visible{outline:3px solid #7FA3D6; outline-offset:2px;}
 section[data-testid="stSidebar"]{background:#E3E8EF;}
 @media (max-width:640px){
-  .formrow{grid-template-columns:1fr; gap:.1rem;}
   .ledger li{grid-template-columns:1.6rem 1fr;} .ledger .who,.ledger .what,.ledger .badge{grid-column:2;}
   .mast h1{font-size:1.8rem;}
 }
